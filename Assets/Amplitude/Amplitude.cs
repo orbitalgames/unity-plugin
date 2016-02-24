@@ -2,6 +2,7 @@ using AmplitudeNS.MiniJSON;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 #if UNITY_IPHONE
 using System.Runtime.InteropServices;
@@ -28,6 +29,8 @@ public class Amplitude {
 	private static extern void _Amplitude_setUserId(string userId);
 	[DllImport ("__Internal")]
 	private static extern void _Amplitude_setUserProperties(string propertiesJson);
+	[DllImport ("__Internal")]
+	private static extern void _Amplitude_unsetUserProperties(string propertiesJson);
 	[DllImport ("__Internal")]
 	private static extern void _Amplitude_setOptOut(bool enabled);
 	[DllImport ("__Internal")]
@@ -208,6 +211,23 @@ public class Amplitude {
 #if UNITY_ANDROID
 		if (Application.platform == RuntimePlatform.Android) {
 			pluginClass.CallStatic("setUserProperties", propertiesJson);
+		}
+#endif
+	}
+
+	public void unsetUserProperties(IEnumerable<string> properties) {
+		string propertiesList = string.Join(",", properties.ToArray());
+
+		Log(string.Format("C# unsetUserProperties {0}", propertiesList));
+#if UNITY_IPHONE
+		if (Application.platform == RuntimePlatform.IPhonePlayer) {
+			_Amplitude_unsetUserProperties(propertiesList);
+		}
+#endif
+
+#if UNITY_ANDROID
+		if (Application.platform == RuntimePlatform.Android) {
+			pluginClass.CallStatic("unsetUserProperties", propertiesList);
 		}
 #endif
 	}
