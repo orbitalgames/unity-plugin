@@ -45,6 +45,17 @@ NSDictionary* ToNSDictionary(const char* data)
     }
 }
 
+NSArray* ToNSArray(const char* data)
+{
+    if (data) {
+        NSString* dataNsStr = [NSString stringWithUTF8String:data];
+        return [dataNsStr componentsSeparatedByString: @","];
+    }
+    else {
+        return nil;
+    }
+}
+
 void _Amplitude_init(const char* apiKey, const char* userId)
 {
 	if (userId) {
@@ -81,6 +92,11 @@ void _Amplitude_setUserId(const char* event)
 void _Amplitude_setUserProperties(const char* properties)
 {
 	[[Amplitude instance] setUserProperties:ToNSDictionary(properties)];
+}
+
+void _Amplitude_unsetUserProperties(const char* properties)
+{
+    [[Amplitude instance] unsetUserProperties:ToNSArray(properties)];
 }
 
 void _Amplitude_setOptOut(const bool enabled)
