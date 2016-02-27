@@ -1,3 +1,8 @@
+## February 26, 2016
+* Update iOS to v3.4.2 [iOS Changelog](https://github.com/amplitude/Amplitude-iOS/blob/master/CHANGELOG.md)
+* Update Android to v2.5.1 [Android Changelog](https://github.com/amplitude/Amplitude-Android/blob/master/CHANGELOG.md)
+* Add unsetUserProperties
+
 ## January 3, 2016
 * Update iOS to v3.4.1 [iOS Changelog](https://github.com/amplitude/Amplitude-iOS/blob/master/CHANGELOG.md)
 * Remove dependency on FMDB, use built-in SQLite3 library.
