@@ -93,6 +93,15 @@ Dictionary<string, object> userProperties = new Dictionary<string, object>() {
 Amplitude.Instance.setUserProperties(userProperties);
 ```
 
+# Clearing User Properties #
+
+To clear properties that are associated with a user, you can unset user properties:
+
+```C#
+string[] userProperties = new[] { "float_gprop" };
+Amplitude.Instance.unsetUserProperties(userProperties);
+```
+
 # Tracking Revenue #
 
 To track revenue from a user, call `logRevenue()` each time a user generates revenue. For example:
